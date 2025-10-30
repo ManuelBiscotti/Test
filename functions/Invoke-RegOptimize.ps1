@@ -2552,6 +2552,96 @@ E0,F6,C5,D5,0E,CA,50,00,00
 ; disable windows search indexing
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\WSearch]
 "Start"=dword:00000004
+
+
+
+
+; DIRECTX
+
+; D3D11 - D3D12 Tweaks
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\DirectX]
+"D3D12_ENABLE_UNSAFE_COMMAND_BUFFER_REUSE"=dword:00000001
+"D3D12_ENABLE_RUNTIME_DRIVER_OPTIMIZATIONS"=dword:00000001
+"D3D12_RESOURCE_ALIGNMENT"=dword:00000001
+"D3D11_MULTITHREADED"=dword:00000001
+"D3D12_MULTITHREADED"=dword:00000001
+"D3D11_DEFERRED_CONTEXTS"=dword:00000001
+"D3D12_DEFERRED_CONTEXTS"=dword:00000001
+"D3D11_ALLOW_TILING"=dword:00000001
+"D3D11_ENABLE_DYNAMIC_CODEGEN"=dword:00000001
+"D3D12_ALLOW_TILING"=dword:00000001
+"D3D12_CPU_PAGE_TABLE_ENABLED"=dword:00000001
+"D3D12_HEAP_SERIALIZATION_ENABLED"=dword:00000001
+"D3D12_MAP_HEAP_ALLOCATIONS"=dword:00000001
+"D3D12_RESIDENCY_MANAGEMENT_ENABLED"=dword:00000001
+
+; DirectX Driver DXGKrnl Advanced Tweaks (2)
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DXGKrnl]
+"CreateGdiPrimaryOnSlaveGPU"=dword:00000001
+"DriverSupportsCddDwmInterop"=dword:00000001
+"DxgkCddSyncDxAccess"=dword:00000001
+"DxgkCddSyncGPUAccess"=dword:00000001
+"DxgkCddWaitForVerticalBlankEvent"=dword:00000001
+"DxgkCreateSwapChain"=dword:00000001
+"DxgkFreeGpuVirtualAddress"=dword:00000001
+"DxgkOpenSwapChain"=dword:00000001
+"DxgkShareSwapChainObject"=dword:00000001
+"DxgkWaitForVerticalBlankEvent"=dword:00000001
+"DxgkWaitForVerticalBlankEvent2"=dword:00000001
+"SwapChainBackBuffer"=dword:00000001
+"TdrResetFromTimeoutAsync"=dword:00000001
+
+
+
+
+; KERNEL
+
+; Base tweaks
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel]
+"DisableOverlappedExecution"=dword:00000000
+"PriorityControl"=dword:00000032
+"QuantumLength"=dword:00000014
+"TimeIncrement"=dword:0000000f
+
+; Advanced tweaks
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel]
+"BufferSize"=dword:00000020
+"DisableLowQosTimerResolution"=dword:00000001
+"IoEnqueueIrp"=dword:00000020
+"IoQueueWorkItem"=dword:00000020
+"IoQueueWorkItemToNode"=dword:00000020
+"IoQueueWorkItemEx"=dword:00000020
+"IoQueueThreadIrp"=dword:00000020
+"ExTryQueueWorkItem"=dword:00000020
+"ExQueueWorkItem"=dword:00000020
+"MaxDynamicTickDuration"=dword:0000000a
+"MaximumSharedReadyQueueSize"=dword:00000080
+"StackSubSystemStackSize"=dword:00010000
+"UseNewEaBuffering"=dword:00000001
+"UseNormalStack"=dword:00000001
+"XMMIZeroingEnable"=dword:00000000
+
+; DPC Tweaks
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel]
+"DpcWatchdogProfileOffset"=dword:00000000
+"DpcTimeout"=dword:00000000
+"IdealDpcRate"=dword:00000001
+"MaximumDpcQueueDepth"=dword:00000001
+"MinimumDpcRate"=dword:00000001
+"DpcWatchdogPeriod"=dword:00000000
+"UnlimitDpcQueue"=dword:00000001
+
+; SerializeTimerExpiration (Value 1)
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel]
+"SerializeTimerExpiration"=dword:00000001
+
+; SplitLargeCaches
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel]
+"SplitLargeCaches"=dword:00000001
+
+; ThreadDpc_Disable
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel]
+"ThreadDpcEnable"=dword:00000000
 '@
 
 	# Download blanc.ico into C:\Windows
@@ -2592,8 +2682,8 @@ E0,F6,C5,D5,0E,CA,50,00,00
 	New-Item -Path "$env:USERPROFILE\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\User Pinned" -Name "ImplicitAppShortcuts" -ItemType Directory -ErrorAction SilentlyContinue | Out-Null
 
 	# Optimizes NTFS for performance
-    fsutil behavior set disablelastaccess 1
-    fsutil behavior set disable8dot3 1
+    fsutil behavior set disablelastaccess 1 | Out-Null 
+    fsutil behavior set disable8dot3 1 | Out-Null
 	
 	# Disable BitLocker
 	# Disable BitLocker on C:
