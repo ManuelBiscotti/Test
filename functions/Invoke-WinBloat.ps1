@@ -250,22 +250,18 @@ for ($i = 1; $i -le 3; $i++) {
 		Remove-WindowsCapability -Online -Name "Microsoft.Windows.MSPaint~~~~0.0.1.0" | Out-Null
 
 		# Uninstall SnippingTool Legacy
-		Write-Output "Uninstalling SnippingTool Legacy..."
-		Start-Process "C:\Windows\System32\SnippingTool.exe" -ArgumentList "/Uninstall"
-		# silent window for old snippingtool w10
-		$processExists = Get-Process -Name SnippingTool -ErrorAction SilentlyContinue
-		if ($processExists) {
-			$running = $true
-			do {
-				$openWindows = Get-Process | Where-Object { $_.MainWindowTitle -ne '' } | Select-Object MainWindowTitle
-				foreach ($window in $openWindows) {
-					if ($window.MainWindowTitle -eq 'Snipping Tool') {
-						Stop-Process -Force -Name SnippingTool -ErrorAction SilentlyContinue | Out-Null
-						$running = $false
-					}
-				}
-			} while ($running)
-		} else {
+		if (Test-Path "C:\Windows\System32\SnippingTool.exe") {
+		    Start-Process "C:\Windows\System32\SnippingTool.exe" -ArgumentList "/Uninstall"
+		    $processExists = Get-Process -Name SnippingTool -ErrorAction SilentlyContinue
+		    if ($processExists) {
+		        do {
+		            $openWindows = Get-Process | Where-Object { $_.MainWindowTitle -ne '' } | Select-Object -ExpandProperty MainWindowTitle
+		            if ($openWindows -contains 'Snipping Tool') {
+		                Stop-Process -Name SnippingTool -Force -ErrorAction SilentlyContinue
+		                break
+		            }
+		        } while ($true)
+		    }
 		}
 
 		# Set Desktop Wallpaper and Style
