@@ -587,7 +587,7 @@ if ($PSBoundParameters.Count -gt 0) {
 			Invoke-PrivacyScript
 			#>
 			Invoke-RegOptimize
-			Invoke-ExperimentalTweaks
+			# Invoke-ExperimentalTweaks
 			Invoke-ServicesMinimal
 			Invoke-UACDisable
 			# Invoke-DefenderDisable
