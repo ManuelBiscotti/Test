@@ -2161,7 +2161,7 @@ Windows Registry Editor Version 5.00
 	Set-Content -Path "$env:TEMP\RegistryExperimental.reg" -Value $MultilineComment -Force
 	# import reg file
 	Regedit.exe /S "$env:TEMP\RegistryExperimental.reg"
-	Timeout T/5 | Out-Null
+	Timeout /T 5 | Out-Null
 	# Remove-Item "$env:TEMP\RegistryExperimental.reg" -Force
 
 
