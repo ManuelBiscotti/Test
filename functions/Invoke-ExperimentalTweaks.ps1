@@ -1,5 +1,5 @@
 function Invoke-ExperimentalTweaks {
-	
+<#
 	$MultilineComment = @'
 Windows Registry Editor Version 5.00
 
@@ -2163,7 +2163,7 @@ Windows Registry Editor Version 5.00
 	Regedit.exe /S "$env:TEMP\RegistryExperimental.reg"
 	Timeout T/5 | Out-Null
 	# Remove-Item "$env:TEMP\RegistryExperimental.reg" -Force
-
+#>
 
 
 	
@@ -2174,7 +2174,7 @@ Windows Registry Editor Version 5.00
 	# DevManView
 	# needed for "Deleting Devices in Device Manager" tweaks
 	Invoke-WebRequest -Uri "https://www.nirsoft.net/utils/devmanview.zip" -OutFile "$env:TEMP\devmanview.zip"; Expand-Archive "$env:TEMP\devmanview.zip" "$env:TEMP\DevManView" -Force; Move-Item "$env:TEMP\DevManView\DevManView.exe" "$env:SystemRoot\System32\DevManView.exe" -Force; Remove-Item "$env:TEMP\devmanview.zip","$env:TEMP\DevManView" -Recurse -Force
-	Invoke-WebRequest -Uri "" -OutFile "$env:TEMP\Cat10IdleOff.pow"
+	Invoke-WebRequest -Uri "https://github.com/ManuelBiscotti/Test/raw/refs/heads/main/tools/Cat10IdleOff.pow" -OutFile "$env:TEMP\Cat10IdleOff.pow"
 
 	$batchCode = @'
 @echo off && title PreSetup2
@@ -2248,10 +2248,16 @@ echo.
 echo 	!S_GRAY!Applying Windows Tweaks...
 
 echo 	!S_GRAY!Importing Power Plan
-	:: powercfg -import "%~dp0Cat10IdleOff.pow"
-	:: powercfg -delete 381b4222-f694-41f0-9685-ff5bb260df2e >NUL 2>&1
-	:: powercfg -delete 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c >NUL 2>&1
-	:: powercfg -delete a1841308-3541-4fab-bc81-f71556f20b4a >NUL 2>&1
+	powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+  	"Invoke-WebRequest -Uri 'https://github.com/ManuelBiscotti/Test/raw/refs/heads/main/tools/Cat10IdleOff.pow' -OutFile \"$env:TEMP\Cat10IdleOff.pow\" -UseBasicParsing"
+	powercfg -import "%TEMP%\Cat10IdleOff.pow"
+	for /f "tokens=3" %%G in ('powercfg -list ^| findstr /i "Cat10IdleOff"') do set GUID=%%G
+	if defined GUID (
+    	powercfg -setactive %GUID%
+    	echo Power plan "Cat10IdleOff" activated successfully.
+	) else (
+    	echo Failed to locate imported power plan.
+	)
 
 echo 	Setting Colors
 	reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent" /v "StartColorMenu" /t REG_DWORD /d "4284394495" /f >NUL 2>&1
