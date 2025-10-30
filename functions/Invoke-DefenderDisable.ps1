@@ -1,4 +1,4 @@
-function Invoke-DisableDefender {
+function Invoke-DefenderDisable {
 
     if (Test-Path "C:\Windows\AtlasModules") {
         Start-Process -FilePath 'C:\Windows\AtlasModules\DisableDefender.cmd' -NoNewWindow -Wait

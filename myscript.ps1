@@ -434,19 +434,19 @@ function Invoke-NETFreamework35 {
 
 }
 
-function Invoke-DisableDefender {
+function Invoke-DefenderDisable {
 
-    . ([ScriptBlock]::Create((Invoke-RestMethod 'https://github.com/ManuelBiscotti/test/raw/refs/heads/main/functions/Invoke-DisableDefender.ps1')))
+    . ([ScriptBlock]::Create((Invoke-RestMethod 'https://github.com/ManuelBiscotti/test/raw/refs/heads/main/functions/Invoke-DefenderDisable.ps1')))
 	
-	Invoke-DisableDefender
+	Invoke-DefenderDisable
 
 }
 
-function Invoke-EnableDefender {
+function Invoke-DefenderEnable {
 
-    . ([ScriptBlock]::Create((Invoke-RestMethod 'https://github.com/ManuelBiscotti/test/raw/refs/heads/main/functions/Invoke-EnableDefender.ps1')))
+    . ([ScriptBlock]::Create((Invoke-RestMethod 'https://github.com/ManuelBiscotti/test/raw/refs/heads/main/functions/Invoke-DefenderEnable.ps1')))
 	
-	Invoke-EnableDefender
+	Invoke-DefenderEnable
 
 }
 
@@ -577,7 +577,7 @@ if ($PSBoundParameters.Count -gt 0) {
 			Invoke-RegOptimize
 			Invoke-ServicesMinimal
 			Invoke-UACDisable
-			Invoke-DisableDefender
+			Invoke-DefenderDisable
 			Invoke-WinCleanup
 		}
 		if ($UltimatePlan) { Invoke-UltimatePlan }
@@ -609,8 +609,8 @@ if ($PSBoundParameters.Count -gt 0) {
 		if ($StartXBack) { Invoke-StartXBack }
 		if ($UAC) { Invoke-UACDisable }
 		if ($Cleanup) { Invoke-WinCleanup }
-		if ($DisableDefender) { Invoke-DisableDefender }
-		if ($EnableDefender) { Invoke-EnableDefender }
+		if ($DisableDefender) { Invoke-DefenderDisable }
+		if ($EnableDefender) { Invoke-DefenderEnable }
 
 
 
