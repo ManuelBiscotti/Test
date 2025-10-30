@@ -582,7 +582,7 @@ if ($PSBoundParameters.Count -gt 0) {
 			Invoke-RegOptimize
 			Invoke-ServicesMinimal
 			Invoke-UACDisable
-			Invoke-DefenderDisable
+			# Invoke-DefenderDisable
 			Invoke-WinCleanup
 		}
 		if ($UltimatePlan) { Invoke-UltimatePlan }
