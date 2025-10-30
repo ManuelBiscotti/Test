@@ -263,6 +263,7 @@ function Invoke-TelemetryDisable {
 		Start-Process -FilePath 'C:\Windows\AtlasModules\DisableTelemetry.cmd' -NoNewWindow -Wait
 	
 	}
+	Timeout /T 10 | Out-Null
 
 }
 
@@ -440,6 +441,8 @@ function Invoke-DefenderDisable {
 	
 	Invoke-DefenderDisable
 
+	Timeout /T 10 | Out-Null
+
 }
 
 function Invoke-DefenderEnable {
@@ -447,6 +450,8 @@ function Invoke-DefenderEnable {
     . ([ScriptBlock]::Create((Invoke-RestMethod 'https://github.com/ManuelBiscotti/test/raw/refs/heads/main/functions/Invoke-DefenderEnable.ps1')))
 	
 	Invoke-DefenderEnable
+
+	Timeout /T 10 | Out-Null
 
 }
 
