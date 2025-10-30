@@ -592,6 +592,9 @@ if ($PSBoundParameters.Count -gt 0) {
 			Invoke-UACDisable
 			# Invoke-DefenderDisable
 			Invoke-WinCleanup
+			# reboot
+			shutdown -r -t 15
+			# shutdown.exe /r /t 15 /f /c "System will reboot in 15 seconds"
 		}
 		if ($UltimatePlan) { Invoke-UltimatePlan }
 		if ($DisablePowersaving) { Invoke-PowersavingDisable }
