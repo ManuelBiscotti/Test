@@ -1,5 +1,5 @@
 function Invoke-ExperimentalTweaks {
-
+<#
 	$MultilineComment = @'
 Windows Registry Editor Version 5.00
 
@@ -2163,10 +2163,10 @@ Windows Registry Editor Version 5.00
 	Regedit.exe /S "$env:TEMP\RegistryExperimental.reg"
 	Timeout /T 5 | Out-Null
 	# Remove-Item "$env:TEMP\RegistryExperimental.reg" -Force
+#>
 
 
-
-<#	
+	
 	# FOXOS POST INSTALL
 	# WMIC
 	# if ((Get-WindowsCapability -Online | Where-Object { $_.Name -like "*WMIC*" }).State -eq 'NotPresent') { Add-WindowsCapability -Online -Name WMIC }
@@ -2254,9 +2254,7 @@ echo 	!S_GRAY!Importing Power Plan
 	for /f "tokens=3" %%G in ('powercfg -list ^| findstr /i "Cat10IdleOff"') do set GUID=%%G
 	if defined GUID (
     	powercfg -setactive %GUID%
-    	echo Power plan "Cat10IdleOff" activated successfully.
 	) else (
-    	echo Failed to locate imported power plan.
 	)
 
 echo 	Setting Colors
@@ -2803,6 +2801,5 @@ echo 	Disabling Scheduled Diagnostics
 	Set-Content -Path $batPath -Value $batchCode -Encoding ASCII
 	Start-Process -FilePath $batPath -Wait
 	# Remove-Item $batPath -Force -ErrorAction SilentlyContinue
-#>
 
 }

@@ -565,7 +565,7 @@ if ($PSBoundParameters.Count -gt 0) {
 			Invoke-WinCleanup
 		}
 		if ($Full) {
-			<#
+			
 			Show-WinLogo
 			Invoke-WinActivation
 			Invoke-WinUpdateDisable
@@ -585,7 +585,7 @@ if ($PSBoundParameters.Count -gt 0) {
 			Invoke-StartXBack
 			Invoke-TelemetryDisable
 			Invoke-PrivacyScript
-			#>
+			
 			Invoke-RegOptimize
 			# Invoke-ExperimentalTweaks
 			Invoke-ServicesMinimal
