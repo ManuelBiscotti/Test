@@ -479,6 +479,14 @@ function Invoke-RegOptimize {
 
 }
 
+function Invoke-ExperimentalTweaks {
+
+    . ([ScriptBlock]::Create((Invoke-RestMethod 'https://github.com/ManuelBiscotti/test/raw/refs/heads/main/functions/Invoke-ExperimentalTweaks.ps1')))
+	
+	Invoke-ExperimentalTweaks
+
+}
+
 function Invoke-ServicesDisable {
 
 	# RunAsTrustedInstaller
@@ -557,6 +565,7 @@ if ($PSBoundParameters.Count -gt 0) {
 			Invoke-WinCleanup
 		}
 		if ($Full) {
+			<#
 			Show-WinLogo
 			Invoke-WinActivation
 			Invoke-WinUpdateDisable
@@ -576,6 +585,7 @@ if ($PSBoundParameters.Count -gt 0) {
 			Invoke-StartXBack
 			Invoke-TelemetryDisable
 			Invoke-PrivacyScript
+			#>
 			Invoke-RegOptimize
 			Invoke-ExperimentalTweaks
 			Invoke-ServicesMinimal
