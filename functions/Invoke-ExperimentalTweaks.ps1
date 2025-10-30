@@ -2174,6 +2174,7 @@ Windows Registry Editor Version 5.00
 	# DevManView
 	# needed for "Deleting Devices in Device Manager" tweaks
 	Invoke-WebRequest -Uri "https://www.nirsoft.net/utils/devmanview.zip" -OutFile "$env:TEMP\devmanview.zip"; Expand-Archive "$env:TEMP\devmanview.zip" "$env:TEMP\DevManView" -Force; Move-Item "$env:TEMP\DevManView\DevManView.exe" "$env:SystemRoot\System32\DevManView.exe" -Force; Remove-Item "$env:TEMP\devmanview.zip","$env:TEMP\DevManView" -Recurse -Force
+	Invoke-WebRequest -Uri "" -OutFile "$env:TEMP\Cat10IdleOff.pow"
 
 	$batchCode = @'
 @echo off && title PreSetup2
@@ -2248,9 +2249,9 @@ echo 	!S_GRAY!Applying Windows Tweaks...
 
 echo 	!S_GRAY!Importing Power Plan
 	:: powercfg -import "%~dp0Cat10IdleOff.pow"
-	powercfg -delete 381b4222-f694-41f0-9685-ff5bb260df2e >NUL 2>&1
+	:: powercfg -delete 381b4222-f694-41f0-9685-ff5bb260df2e >NUL 2>&1
 	:: powercfg -delete 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c >NUL 2>&1
-	powercfg -delete a1841308-3541-4fab-bc81-f71556f20b4a >NUL 2>&1
+	:: powercfg -delete a1841308-3541-4fab-bc81-f71556f20b4a >NUL 2>&1
 
 echo 	Setting Colors
 	reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent" /v "StartColorMenu" /t REG_DWORD /d "4284394495" /f >NUL 2>&1
@@ -2546,11 +2547,11 @@ echo 	Drivers Tweaks
 	reg add "HKLM\SYSTEM\CurrentControlSet\services\Wanarpv6" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>&1
 	sc config luafv start= disabled >NUL 2>&1
 	
-echo 	Restoring Default Photo Viewer
-	for %%i in (tif tiff bmp dib gif jfif jpe jpeg jpg jxr png) do (
-        reg add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".%%~i" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f) >NUL 2>&1
-	for %%a in (tif tiff bmp dib gif jfif jpe jpeg jpg jxr png) do (
-		reg add "HKCU\SOFTWARE\Classes.%%~a" /ve /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f) >NUL 2>&1
+@REM echo 	Restoring Default Photo Viewer
+@REM	for %%i in (tif tiff bmp dib gif jfif jpe jpeg jpg jxr png) do (
+@REM        reg add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".%%~i" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f) >NUL 2>&1
+@REM	for %%a in (tif tiff bmp dib gif jfif jpe jpeg jpg jxr png) do (
+@REM		reg add "HKCU\SOFTWARE\Classes.%%~a" /ve /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f) >NUL 2>&1
 
 echo 	Deleting Devices in Device Manager
 	DevManView /disable "Microsoft Radio Device Enumeration Bus" >NUL 2>&1
