@@ -1041,7 +1041,7 @@ while ($true) {
                         Clear-Host
                         switch ($appChoice.ToUpper()) {
                             '1' {  
-
+								<#
 								# Toggle Defender
     							if (Test-Path "C:\Windows\AtlasModules") {
 		
@@ -1055,8 +1055,8 @@ while ($true) {
 									Start-Process -FilePath 'C:\Windows\AtlasModules\ToggleDefender.cmd' -NoNewWindow -Wait
 	
 								}
-
-								<#
+								#>
+								
 								# Achille's Script
 								$folder = Join-Path $env:USERPROFILE "Desktop\AchillesScript"
 								New-Item -ItemType Directory -Path $folder -Force | Out-Null
@@ -1064,8 +1064,7 @@ while ($true) {
 								Invoke-WebRequest -Uri "https://github.com/lostzombie/AchillesScript/raw/refs/heads/main/AchillesScript.cmd" -OutFile $dest -UseBasicParsing
 								Write-Host "Downloaded to: $dest"
 								Start-Process "$dest"
-								#>
-
+								
 							}
 							'2' { 
 
