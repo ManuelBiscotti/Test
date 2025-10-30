@@ -2591,6 +2591,10 @@ E0,F6,C5,D5,0E,CA,50,00,00
 	New-Item -Path "$env:USERPROFILE\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\User Pinned" -Name "TaskBar" -ItemType Directory -ErrorAction SilentlyContinue | Out-Null
 	New-Item -Path "$env:USERPROFILE\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\User Pinned" -Name "ImplicitAppShortcuts" -ItemType Directory -ErrorAction SilentlyContinue | Out-Null
 
+	# Optimizes NTFS for performance
+    fsutil behavior set disablelastaccess 1
+    fsutil behavior set disable8dot3 1
+	
 	# Disable BitLocker
 	# Disable BitLocker on C:
 	Disable-BitLocker -MountPoint "C:" 2>&1 | Out-Null

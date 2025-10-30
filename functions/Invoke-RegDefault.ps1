@@ -3903,6 +3903,10 @@ _dpctimeout"=-
 	# revert image settings
 	cmd /c "reg delete `"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP`" /f >nul 2>&1"
 
+	# NTFS default
+    fsutil behavior set disablelastaccess 0
+    fsutil behavior set disable8dot3 0
+	
 	# Disable MSI Mode
 	# get all gpu driver ids
 	$gpuDevices = Get-PnpDevice -Class Display
