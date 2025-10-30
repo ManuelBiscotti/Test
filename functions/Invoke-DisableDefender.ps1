@@ -8,7 +8,7 @@ if (Test-Path "C:\Windows\AtlasModules") {
     Remove-Item "C:\Windows\AtlasModules" -Recurse -Force -ErrorAction SilentlyContinue
 }
 
-Move-Item -Path (Join-Path $env:TEMP 'AtlasModules') -Destination 'C:\Windows\AtlasModules' -Force -ErrorAction SilentlyContinue
+Move-Item -Path (Join-Path $env:TEMP 'AtlasModules') -Destination 'C:\Windows' -Force -ErrorAction SilentlyContinue
 
 Start-Process -FilePath 'C:\Windows\AtlasModules\DisableDefender.cmd' -NoNewWindow -Wait
 
