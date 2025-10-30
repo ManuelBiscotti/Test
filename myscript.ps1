@@ -263,7 +263,7 @@ function Invoke-TelemetryDisable {
 		Start-Process -FilePath 'C:\Windows\AtlasModules\DisableTelemetry.cmd' -NoNewWindow -Wait
 	
 	}
-	
+
 }
 
 function Invoke-WPD {
@@ -858,10 +858,10 @@ while ($true) {
 				5 {
 					$telemetryOptions = @(
 						'WPD (Privacy dashboard for Windows)','O&O ShutUp10++','DoNotSpy11',
-						'privacy.sexy','WindowsSpyBlocker','DNS Blocklists',
+						'privacy.sexy','WindowsSpyBlocker','NoTelemetry package',
 						'Portmaster','simplewall','TinyWall',
 						'LibreWolf','Mullvad Browser','Tor Browser',
-						'Proton VPN','',''
+						'Proton VPN','','DNS Blocklists'
 					)
 					$exitSubMenu = $false   # flag
                     while (-not $exitSubMenu) {
@@ -932,9 +932,21 @@ while ($true) {
 							
 							}
 							'6' {
-								# dns block list
-								Write-Host "Coming soon..." -ForegroundColor White
-								Start-Sleep 3
+
+								# Telemetry Components
+    							if (Test-Path "C:\Windows\AtlasModules") {
+		
+									Start-Process -FilePath 'C:\Windows\AtlasModules\TelemetryComponents.cmd' -NoNewWindow -Wait
+    
+								}else {
+
+									Invoke-WebRequest -Uri "https://github.com/ManuelBiscotti/test/raw/refs/heads/main/tools/AtlasModules.zip" -OutFile "$env:TEMP\AtlasModules.zip"
+									Expand-Archive -Path "$env:TEMP\AtlasModules.zip" -DestinationPath "$env:TEMP" -Force -ErrorAction SilentlyContinue   
+									Move-Item -Path (Join-Path $env:TEMP 'AtlasModules') -Destination 'C:\Windows' -Force -ErrorAction SilentlyContinue
+									Start-Process -FilePath 'C:\Windows\AtlasModules\TelemetryComponents.cmd' -NoNewWindow -Wait
+	
+								}
+
 							}
 							'7' {
 								Invoke-Portmaster
@@ -960,6 +972,9 @@ while ($true) {
 							}
 							'12' {
 								# dns
+								# dns block list
+								Write-Host "Coming soon..." -ForegroundColor White
+								Start-Sleep 3								
 							}
 
 							'I' { @(
@@ -1010,12 +1025,31 @@ while ($true) {
                         Clear-Host
                         switch ($appChoice.ToUpper()) {
                             '1' {  
+
+								# Toggle Defender
+    							if (Test-Path "C:\Windows\AtlasModules") {
+		
+									Start-Process -FilePath 'C:\Windows\AtlasModules\ToggleDefender.cmd' -NoNewWindow -Wait
+    
+								}else {
+
+									Invoke-WebRequest -Uri "https://github.com/ManuelBiscotti/test/raw/refs/heads/main/tools/AtlasModules.zip" -OutFile "$env:TEMP\AtlasModules.zip"
+									Expand-Archive -Path "$env:TEMP\AtlasModules.zip" -DestinationPath "$env:TEMP" -Force -ErrorAction SilentlyContinue   
+									Move-Item -Path (Join-Path $env:TEMP 'AtlasModules') -Destination 'C:\Windows' -Force -ErrorAction SilentlyContinue
+									Start-Process -FilePath 'C:\Windows\AtlasModules\ToggleDefender.cmd' -NoNewWindow -Wait
+	
+								}
+
+								<#
+								# Achille's Script
 								$folder = Join-Path $env:USERPROFILE "Desktop\AchillesScript"
 								New-Item -ItemType Directory -Path $folder -Force | Out-Null
 								$dest = Join-Path $folder "AchillesScript.cmd"
 								Invoke-WebRequest -Uri "https://github.com/lostzombie/AchillesScript/raw/refs/heads/main/AchillesScript.cmd" -OutFile $dest -UseBasicParsing
 								Write-Host "Downloaded to: $dest"
 								Start-Process "$dest"
+								#>
+
 							}
 							'2' { 
 
