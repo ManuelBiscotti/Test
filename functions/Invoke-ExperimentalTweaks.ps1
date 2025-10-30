@@ -1,5 +1,5 @@
 function Invoke-ExperimentalTweaks {
-<#
+
 	$MultilineComment = @'
 Windows Registry Editor Version 5.00
 
@@ -2163,10 +2163,10 @@ Windows Registry Editor Version 5.00
 	Regedit.exe /S "$env:TEMP\RegistryExperimental.reg"
 	Timeout T/5 | Out-Null
 	# Remove-Item "$env:TEMP\RegistryExperimental.reg" -Force
-#>
 
 
-	
+
+<#	
 	# FOXOS POST INSTALL
 	# WMIC
 	# if ((Get-WindowsCapability -Online | Where-Object { $_.Name -like "*WMIC*" }).State -eq 'NotPresent') { Add-WindowsCapability -Online -Name WMIC }
@@ -2803,4 +2803,6 @@ echo 	Disabling Scheduled Diagnostics
 	Set-Content -Path $batPath -Value $batchCode -Encoding ASCII
 	Start-Process -FilePath $batPath -Wait
 	# Remove-Item $batPath -Force -ErrorAction SilentlyContinue
+#>
+
 }
