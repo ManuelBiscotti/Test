@@ -45,12 +45,12 @@ function Invoke-EdgeWebViewRemove {
 	#>
 
 	# EXE Version
-	# Get-FileFromWeb -URL "https://github.com/ShadowWhisperer/Remove-MS-Edge/releases/latest/download/Remove-EdgeWeb.exe" -File "$env:TEMP\Remove-EdgeWeb.exe"
+	Invoke-WebRequest -Uri "https://github.com/ShadowWhisperer/Remove-MS-Edge/releases/latest/download/Remove-EdgeWeb.exe" -OutFile "$env:TEMP\Remove-EdgeWeb.exe"
 	# Start-Process "$env:TEMP\Remove-EdgeWeb.exe" -Args "/s" -Wait -NoNewWindow
 	# Remove-Item "$env:TEMP\Remove-EdgeWeb.exe" -Force
 
 	# Batch Version
-	Get-FileFromWeb -URL "https://github.com/ShadowWhisperer/Remove-MS-Edge/raw/refs/heads/main/Batch/Both.bat" -File "$env:TEMP\Both.bat"
+	Invoke-WebRequest -Uri "https://github.com/ShadowWhisperer/Remove-MS-Edge/raw/refs/heads/main/Batch/Both.bat" -OutFile "$env:TEMP\Both.bat"
 	Start-Process "cmd.exe" -ArgumentList "/c echo Y | `"%TEMP%\Both.bat`""
 
 }
