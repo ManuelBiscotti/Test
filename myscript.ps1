@@ -548,6 +548,7 @@ if ($PSBoundParameters.Count -gt 0) {
 		}
 		if ($Full) {
 			Show-WinLogo
+			<#
 			Invoke-WinActivation
 			Invoke-WinUpdateDisable
 			Invoke-UltimatePlan
@@ -559,8 +560,7 @@ if ($PSBoundParameters.Count -gt 0) {
 			Invoke-OneDriveUninstall	
 			Invoke-EdgeRemove
 			# Invoke-EdgeWebViewRemove
-			Invoke-Brave
-			<#
+			Invoke-Brave	
 			Invoke-DirectX
 			Invoke-CPlusPlusAIO
 			Invoke-NETFreamework35
