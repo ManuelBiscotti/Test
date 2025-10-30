@@ -202,7 +202,9 @@ function Invoke-TelemetryDisable {
 	#>
 	
 	try {
-      bcdedit /set `{current`} bootmenupolicy Legacy | Out-Null
+
+		# Disable Telemetry (CTT)
+      	bcdedit /set `{current`} bootmenupolicy Legacy | Out-Null
         If ((get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" -Name CurrentBuild).CurrentBuild -lt 22557) {
             $taskmgr = Start-Process -WindowStyle Hidden -FilePath taskmgr.exe -PassThru
             Do {
@@ -236,28 +238,26 @@ function Invoke-TelemetryDisable {
 	}catch{
 	}
 
+	# WPD
     . ([ScriptBlock]::Create((Invoke-RestMethod 'https://github.com/ManuelBiscotti/test/raw/refs/heads/main/functions/Invoke-WPD.ps1')))
   	
 	Invoke-WPD  
 
 	. ([ScriptBlock]::Create((Invoke-RestMethod 'https://github.com/ManuelBiscotti/test/raw/refs/heads/main/functions/Get-FileFromWeb.ps1')))
 
+	# O&O ShutUp10++
 	. ([ScriptBlock]::Create((Invoke-RestMethod 'https://github.com/ManuelBiscotti/test/raw/refs/heads/main/functions/Invoke-ShutUp10.ps1')))
 
 	Invoke-ShutUp10
 
-Invoke-WebRequest -Uri "https://github.com/ManuelBiscotti/test/raw/refs/heads/main/tools/AtlasModules.zip" -OutFile "$env:TEMP\AtlasModules.zip"
-
-Expand-Archive -Path "$env:TEMP\AtlasModules.zip" -DestinationPath "$env:TEMP" -Force -ErrorAction SilentlyContinue   
-
-if (Test-Path "C:\Windows\AtlasModules") {
-    Remove-Item "C:\Windows\AtlasModules" -Recurse -Force -ErrorAction SilentlyContinue
-}
-
-Move-Item -Path (Join-Path $env:TEMP 'AtlasModules') -Destination 'C:\Windows' -Force -ErrorAction SilentlyContinue
-
-Start-Process -FilePath 'C:\Windows\AtlasModules\DisableTelemetry.cmd' -NoNewWindow -Wait
-
+	# Add NoTelemetry package (ATLAS)
+	Invoke-WebRequest -Uri "https://github.com/ManuelBiscotti/test/raw/refs/heads/main/tools/AtlasModules.zip" -OutFile "$env:TEMP\AtlasModules.zip"
+	Expand-Archive -Path "$env:TEMP\AtlasModules.zip" -DestinationPath "$env:TEMP" -Force -ErrorAction SilentlyContinue   
+	if (Test-Path "C:\Windows\AtlasModules") {
+    	Remove-Item "C:\Windows\AtlasModules" -Recurse -Force -ErrorAction SilentlyContinue
+	}
+	Move-Item -Path (Join-Path $env:TEMP 'AtlasModules') -Destination 'C:\Windows' -Force -ErrorAction SilentlyContinue
+	Start-Process -FilePath 'C:\Windows\AtlasModules\DisableTelemetry.cmd' -NoNewWindow -Wait
 
 }
 
