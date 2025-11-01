@@ -579,6 +579,7 @@ if ($PSBoundParameters.Count -gt 0) {
 			Invoke-EdgeWebViewRemove
 			Invoke-Brave	
 			Invoke-DirectX
+			<#
 			Invoke-CPlusPlusAIO
 			Invoke-NETFreamework35
 			Invoke-7Zip
@@ -594,6 +595,7 @@ if ($PSBoundParameters.Count -gt 0) {
 			# reboot
 			shutdown -r -t 15
 			# shutdown.exe /r /t 15 /f /c "System will reboot in 15 seconds"
+			#>
 		}
 		if ($UltimatePlan) { Invoke-UltimatePlan }
 		if ($DisablePowersaving) { Invoke-PowersavingDisable }
