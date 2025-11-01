@@ -46,7 +46,5 @@ function Invoke-WinUpdateDisable {
 
     # try to refresh Settings (close Settings app if open)
     Get-Process -Name "SystemSettings","Settings" -ErrorAction SilentlyContinue | ForEach-Object { $_.CloseMainWindow() | Out-Null; Start-Sleep -Milliseconds 200; $_ | Stop-Process -Force -ErrorAction SilentlyContinue }
-
-    "Applied: $regPath\$name = $hideValue (backup -> $backupName). A sign-out or reboot may be required for all users."
-
+    
 }
