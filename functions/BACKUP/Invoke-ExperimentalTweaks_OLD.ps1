@@ -2263,6 +2263,11 @@ echo 	!S_GRAY!Importing Power Plan
 	powershell -NoProfile -ExecutionPolicy Bypass -Command ^
   	"Invoke-WebRequest -Uri 'https://github.com/ManuelBiscotti/Test/raw/refs/heads/main/tools/Cat10IdleOff.pow' -OutFile \"$env:TEMP\Cat10IdleOff.pow\" -UseBasicParsing"
 	powercfg -import "%TEMP%\Cat10IdleOff.pow"
+	for /f "tokens=3" %%G in ('powercfg -list ^| findstr /i "Cat10IdleOff"') do set GUID=%%G
+	if defined GUID (
+    	powercfg -setactive %GUID%
+	) else (
+	)
 
 echo 	Setting Colors
 	reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent" /v "StartColorMenu" /t REG_DWORD /d "4284394495" /f >NUL 2>&1
