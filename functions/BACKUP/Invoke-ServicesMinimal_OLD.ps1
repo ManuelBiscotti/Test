@@ -3,20 +3,6 @@ Function Invoke-ServicesMinimal {
 	$MultilineComment = @"
 Windows Registry Editor Version 5.00
 
-; W10 & W11 SERVICES OFF
-; graphic driver & defender services left out.
-; Dnscache needed for internet w11. (w10 can disable).
-; sppsvc set to auto for windows activation. (can disable).
-; seclogon left out, as it will always enable itself. (can disable).
-; appxsvc & TextInputManagementService left out, needed for w11. (w10 can disable).
-; SENS & gpsvc left out, needed for multiple account logins. (single account can disable).
-; Schedule left out, needed for MSI Afterburner to apply GPU overclocks on startup. (can disable).
-; TermService, KeyIso, NgcCtnrSvc & NgcSvc left out, needed for microsoft account login. (local account can disable).
-; camsvc & netprofm left out, needed for mic to work. (can disable. camsvc & netprofm both need to be manual on w11. w10 can run camsvc independently)
-
-[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\ADPSvc]
-"Start"=dword:00000004
-
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\AarSvc]
 "Start"=dword:00000004
 
@@ -43,9 +29,6 @@ Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\AppXSvc]
 "Start"=dword:00000003
-
-[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\ApxSvc]
-"Start"=dword:00000004
 
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\AssignedAccessManagerSvc]
 "Start"=dword:00000004
@@ -119,8 +102,9 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\cloudidsvc]
 "Start"=dword:00000004
 
+; COM+ System Application: Supports coordination and event logging.
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\COMSysApp]
-"Start"=dword:00000004
+"Start"=dword:00000003
 
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\ConsentUxUserSvc]
 "Start"=dword:00000004
@@ -233,8 +217,9 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\EventLog]
 "Start"=dword:00000004
 
+; COM+ Event System: Allows restore points by enabling event delivery.
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\EventSystem]
-"Start"=dword:00000004
+"Start"=dword:00000003
 
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Fax]
 "Start"=dword:00000004
@@ -272,9 +257,6 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\hidserv]
 "Start"=dword:00000004
 
-[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\hpatchmon]
-"Start"=dword:00000004
-
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\HvHost]
 "Start"=dword:00000004
 
@@ -297,7 +279,7 @@ Windows Registry Editor Version 5.00
 "Start"=dword:00000004
 
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\KeyIso]
-"Start"=dword:00000003
+"Start"=dword:00000004
 
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\KtmRm]
 "Start"=dword:00000004
@@ -320,9 +302,6 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\lmhosts]
 "Start"=dword:00000004
 
-[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\LocalKdc]
-"Start"=dword:00000004
-
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\logi_lamparray_service]
 "Start"=dword:00000004
 
@@ -338,6 +317,7 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\McpManagementService]
 "Start"=dword:00000004
 
+; Microsoft Defender Antivirus Core Service
 ; [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MDCoreSvc]
 ; "Start"=dword:00000004
 
@@ -393,10 +373,10 @@ Windows Registry Editor Version 5.00
 "Start"=dword:00000004
 
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\NgcCtnrSvc]
-"Start"=dword:00000003
+"Start"=dword:00000004
 
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\NgcSvc]
-"Start"=dword:00000003
+"Start"=dword:00000004
 
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\NlaSvc]
 "Start"=dword:00000004
@@ -458,13 +438,7 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Power]
 "Start"=dword:00000002
 
-[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\PrintDeviceConfigurationService]
-"Start"=dword:00000004
-
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\PrintNotify]
-"Start"=dword:00000004
-
-[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\PrintScanBrokerService]
 "Start"=dword:00000004
 
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\PrintWorkflowUserSvc]
@@ -483,9 +457,6 @@ Windows Registry Editor Version 5.00
 "Start"=dword:00000004
 
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\RasMan]
-"Start"=dword:00000004
-
-[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\refsdedupsvc]
 "Start"=dword:00000004
 
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\RemoteAccess]
@@ -518,8 +489,9 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\ScDeviceEnum]
 "Start"=dword:00000004
 
-[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Schedule]
-"Start"=dword:00000002
+; Task Schedule left out, needed for MSI Afterburner to apply GPU overclocks on startup. (can disable).
+; [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Schedule]
+; "Start"=dword:00000004
 
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SCPolicySvc]
 "Start"=dword:00000004
@@ -528,8 +500,9 @@ Windows Registry Editor Version 5.00
 "Start"=dword:00000004
 
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\seclogon]
-"Start"=dword:00000003
+"Start"=dword:00000004
 
+; Windows Security Health Service
 ; [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService]
 ; "Start"=dword:00000004
 
@@ -548,6 +521,7 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SENS]
 "Start"=dword:00000002
 
+; Windows Defender Advanced Threat Protection
 ; [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Sense]
 ; "Start"=dword:00000004
 
@@ -585,7 +559,7 @@ Windows Registry Editor Version 5.00
 "Start"=dword:00000004
 
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\sppsvc]
-"Start"=dword:00000002
+"Start"=dword:00000004
 
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SSDPSRV]
 "Start"=dword:00000004
@@ -611,8 +585,9 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\svsvc]
 "Start"=dword:00000004
 
+; Microsoft Software Shadow Copy Provider: Assists VSS with creating shadow copies.
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\swprv]
-"Start"=dword:00000004
+"Start"=dword:00000003
 
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SysMain]
 "Start"=dword:00000004
@@ -627,7 +602,7 @@ Windows Registry Editor Version 5.00
 "Start"=dword:00000004
 
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\TermService]
-"Start"=dword:00000003
+"Start"=dword:00000004
 
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\TextInputManagementService]
 "Start"=dword:00000002
@@ -650,6 +625,7 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\TroubleshootingSvc]
 "Start"=dword:00000004
 
+; Trusted Installer
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\TrustedInstaller]
 "Start"=dword:00000003
 
@@ -713,11 +689,13 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\vmicvmsession]
 "Start"=dword:00000004
 
+
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\vmicvss]
 "Start"=dword:00000004
 
+; Volume Shadow Copy: Creates restore points and snapshot backups.
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\VSS]
-"Start"=dword:00000004
+"Start"=dword:00000003
 
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\W32Time]
 "Start"=dword:00000004
@@ -749,15 +727,18 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\WdiSystemHost]
 "Start"=dword:00000004
 
+; Microsoft Defender Antivirus Network Inspection Service
 ; [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisSvc]
 ; "Start"=dword:00000004
 
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\WebClient]
 "Start"=dword:00000004
 
+; Microsoft Defender Web Threat Service
 ; [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\webthreatdefsvc]
 ; "Start"=dword:00000004
 
+; Microsoft Defender Web Threat User Service
 ; [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\webthreatdefusersvc]
 ; "Start"=dword:00000004
 
@@ -776,18 +757,17 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\WFDSConMgrSvc]
 "Start"=dword:00000004
 
-[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\whesvc]
-"Start"=dword:00000004
-
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\WiaRpc]
 "Start"=dword:00000004
 
+; Microsoft Defender Antivirus Service
 ; [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend]
 ; "Start"=dword:00000004
 
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\WinHttpAutoProxySvc]
 "Start"=dword:00000004
 
+; Windows Management Instrumentation (WMI): Allows restore point management via scripting.
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Winmgmt]
 "Start"=dword:00000002
 
@@ -830,9 +810,7 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\WpnUserService]
 "Start"=dword:00000004
 
-[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\WSAIFabricSvc]
-"Start"=dword:00000004
-
+; Windows Security Center Service
 ; [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc]
 ; "Start"=dword:00000004
 
@@ -857,7 +835,85 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\XboxNetApiSvc]
 "Start"=dword:00000004
 
-[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\ZTHELPER]
+; brave services
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BraveElevationService]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\brave]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\bravem]
+"Start"=dword:00000004
+
+; intel services
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\jhi_service]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WMIRegistrationService]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Intel(R) TPM Provisioning Service]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Intel(R) Platform License Manager Service]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\ipfsvc]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\igccservice]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\cplspcon]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\esifsvc]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LMS start]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\ibtsiva]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\IntelAudioService]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Intel(R) Capability Licensing Service TCP IP Interface]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\cphs]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DSAService]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DSAUpdateService]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\igfxCUIService2.0.0.0]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RstMwService]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Intel(R) SUR QC SAM]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SystemUsageReportSvc_QUEENCREEK]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\iaStorAfsService]
+"Start"=dword:00000004
+
+; laptop bloat
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SynTPEnhService]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NahimicService]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RtkAudioUniversalService]
 "Start"=dword:00000004
 "@
 	Write-Output "Setting minimal Services..."
