@@ -1,5 +1,17 @@
 function Invoke-ExperimentalTweaks {
-<#
+	<#
+	.SYNOPSIS
+	Applies experimental registry tweaks for performance optimization.
+
+	.DESCRIPTION
+	This function creates a temporary registry file with various experimental tweaks aimed at optimizing system performance. It then imports this registry file into the Windows Registry.
+
+	.EXAMPLE
+	Invoke-ExperimentalTweaks
+	Applies the experimental registry tweaks to the system.
+
+	.NOTES
+	#>
 	$MultilineComment = @'
 Windows Registry Editor Version 5.00
 
@@ -2163,7 +2175,7 @@ Windows Registry Editor Version 5.00
 	Regedit.exe /S "$env:TEMP\RegistryExperimental.reg"
 	Timeout /T 5 | Out-Null
 	# Remove-Item "$env:TEMP\RegistryExperimental.reg" -Force
-#>
+
 
 
 	
