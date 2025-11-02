@@ -579,19 +579,19 @@ if ($PSBoundParameters.Count -gt 0) {
 			Invoke-EdgeWebViewRemove
 			Invoke-Brave	
 			Invoke-DirectX
-			#>
 			Invoke-CPlusPlusAIO
 			Invoke-NETFreamework35
 			Invoke-7Zip
 			Invoke-StartXBack
 			Invoke-TelemetryDisable
 			Invoke-PrivacyScript
-			# Invoke-RegOptimize
+			#>
+			Invoke-RegOptimize
 			# Invoke-ExperimentalTweaks
 			# Invoke-ServicesMinimal
-			Invoke-UACDisable
+			# Invoke-UACDisable
 			# Invoke-DefenderDisable
-			Invoke-WinCleanup
+			# Invoke-WinCleanup
 			# reboot
 			shutdown -r -t 15
 			# shutdown.exe /r /t 15 /f /c "System will reboot in 15 seconds"
