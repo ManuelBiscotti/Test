@@ -586,9 +586,9 @@ if ($PSBoundParameters.Count -gt 0) {
 			Invoke-TelemetryDisable
 			Invoke-PrivacyScript
 			#>
-			Invoke-RegOptimize # BSOD
+			# Invoke-RegOptimize # BSOD
 			# Invoke-ExperimentalTweaks
-			Invoke-ServicesMinimal # CRASH
+			# Invoke-ServicesMinimal # CRASH
 			Invoke-UACDisable
 			Invoke-DefenderDisable
 			# Invoke-WinCleanup
