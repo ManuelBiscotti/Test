@@ -587,10 +587,10 @@ if ($PSBoundParameters.Count -gt 0) {
 			Invoke-PrivacyScript
 			#>
 			Invoke-RegOptimize # BSOD
-			Invoke-ExperimentalTweaks
-			# Invoke-ServicesMinimal CRASH
-			# Invoke-UACDisable
-			# Invoke-DefenderDisable
+			# Invoke-ExperimentalTweaks
+			Invoke-ServicesMinimal # CRASH
+			Invoke-UACDisable
+			Invoke-DefenderDisable
 			# Invoke-WinCleanup
 			# reboot
 			shutdown -r -t 15
